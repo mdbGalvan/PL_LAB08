@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Parser using Jison</title>
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg" />
+    <!-- <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" charset="utf-8" /> -->
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- Underscore -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <!-- Bootstrap -->
+    <link href="lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Codemirror -->
+    <link href="lib/codemirror/codemirror.css" rel="stylesheet" />
+    <script src="lib/codemirror/codemirror.js"></script>
+    <script src="lib/codemirror/mode/pascal/pascal.js"></script>
+  </head>
+  <body>
+    <header>
+      <img class="center-block" src="img/logo.png" width=10%>
+      <h1 class="text-center almendra">Analizador Sintáctico del Lenguaje PL0 usando Jison</h1>
+    </header>
+
+    <section>
+      <%= yield %>
+    </section>
+    <script src="js/jquery.stickytableheaders.js"></script>
+    <script type="text/javascript">$("table.ini").stickyTableHeaders();</script>
+    <footer>
+      <script>
+        var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("input"), {
+          lineNumbers: true,
+          viewportMargin: Infinity
+        });
+      </script>
+      <script type="text/javascript" src="js/calculator.js"></script>
+      <script type="text/javascript" src="js/calculator2.js"></script>
+      <script type="text/javascript" src="js/main.js"></script>
+    </footer>
+  </body>
+</html>

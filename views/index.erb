@@ -1,0 +1,116 @@
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="/" title="Home" <%=current?("/")%>>Home</a></li>
+      <li><a href="/grammar"  title="Grammar" <%=current?("/grammar")%>>Grammar</a></li>
+      <li><a href="/tests"  title="Tests" <%=current?("/tests")%>>Tests</a></li>
+      <li> <a href="https://github.com/mdbGalvan/PL_LAB08" target="_blank" title="Repo">Repo</a> </li>
+      <li> <a href="http://en.wikipedia.org/wiki/Recursive_descent_parser#Example_parser" target="_blank"  title="Wikipedia">PL0</a> </li>
+      <li> <a href="http://zaach.github.io/jison/" target="_blank" title="Jison">Jison</a> </li>
+      <li> <a href="http://intridea.github.io/omniauth/" target="_blank" title="Intridea Omniauth">Omniauth</a> </li>
+      <li> <a href="https://console.developers.google.com/project" target="_blank" title="Google Developers Console">GDC</a> </li>
+      <li> <a href="http://crguezl.github.io/pl-html/" target="_blank" title="PLGH">PL-GH</a> </li>
+      <li> <a href="https://github.com/SFEley/sinatra-flash" target="_blank" title="sinatra-flash">Flash</a> </li>
+    </ul>
+
+<div id="content">
+
+  <div class="btn-group pull-right">
+    <a class="btn btn-primary" href=<%= url %>><img class="img-circle" src=<%= img %> title="Site Web" target="_blank" width=18 height=18> <%= user %></a>
+    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="/auth/google_oauth2"  title="Google" <%=current?("/auth/google_oauth2")%>><img src="img/google.png" title="Google" width=20 height=20> Sign in with Google </a></li>
+      <li><a href="/auth/facebook"  title="Facebook" <%=current?("/auth/facebook")%>><img src="img/facebook.png" title="Facebook" width=20 height=20> Sign in with Facebook  </a></li>
+      <li><a href="/auth/twitter"  title="Twitter" <%=current?("/auth/twitter")%>><img src="img/twitter.png" title="Twitter" width=20 height=20> Sign in with Twitter</a></li>
+      <li><a href="#"><img src="img/github.png" title="GitHub" width=20 height=20> Sign In with GitHub </a></li>
+      <li><a href="#"><img src="img/linkedin.png" title="LinkedIn" width=20 height=20> Sign In with LinkedIn </a></li>
+      <li class="divider"></li>
+      <li><a href="/logout"><img src="img/logout.png" title="Sign Out" width=20 height=20> Sign Out</a></li>
+    </ul>
+  </div>
+
+  <br><br>
+
+    <table class="loadfile">
+      <tr>
+        <td class="save">Select a file already stored:</td>
+        <td>Or write your own code:</td>
+      </tr>
+      <tr>
+        <td>
+          <ul class="nav">
+            <% programs.sort.each do |p| %>
+              <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
+            <% end %>
+          </ul>   
+          <p>
+            Or load an existing file:
+          </p>
+          <span class="btn btn-primary btn-file">
+            File <input type="file" id="examples">
+          </span>
+        </td>
+        <td>
+          <form class="form-horizontal" action="/save" method="post">
+            <textarea id="input" name="input" autofocus rows = "7">
+<%= source %>
+            </textarea>
+            <div class="control-group">
+              <label for="saveas">Save the code as:</label>
+              <input id="saveas" type="text" name="fname" class="input-large"
+                title="Un identificador (que no sea la palabra 'test')"
+                pattern="^(?!test$)\w+$"/>
+              <button class="btn" type="button">Go!</button>
+            </div>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-primary" id="parse" type="button">parse</button></td>
+        <td>
+          <form class="form-horizontal" action="/delete" method="post">
+            <div class="control-group">
+              <label for="deleteas">Delete the code:</label>
+              <input id="deleteas" type="text" name="fname" class="input-large"
+                title="Un identificador (que no sea la palabra 'test')"
+                           pattern="^(?!test$)\w+$"/>
+              <button class="btn" type="button">Go!</button>
+            </div>
+          </form>
+        </td>
+      </tr>
+    </table>
+
+  <p>
+    <div id="flash"><%= flash[:notice] if flash[:notice]%></div>
+  </p>
+
+  <div class="hidden" id="out">
+    <table class="ini">
+      <thead>
+        <tr>
+          <th>Tokens</th>
+          <th>Calculator</th>
+        </tr>
+      </thead>
+      <tbody class="scrollContent">
+        <tr>
+          <td>
+            <div class="output"><!-- Output goes here! --> 
+              <pre>
+<span id="output"></span>
+              </pre>
+            </div>
+          </td>
+          <td>
+            <div class="output"><!-- Output goes here! --> 
+              <pre>
+<span id="output2"></span>
+              </pre>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div> <!-- content -->
+

@@ -6,7 +6,7 @@
 
 >Además, se tuvo que:
 
->1. Modifique la práctica anterior para que cada nodo del tipo `PROCEDURE` disponga de una tabla de símbolos en la que se almacenan todos las constantes, variables y procedimientos declarados en el mismo.
+>1. Modifique la práctica anterior para que cada nodo del tipo `PROCEDURE` disponga de una tabla de símbolos en la que se almacenan todas las constantes, variables y procedimientos declarados en el mismo.
 >2. Existirá ademas una tabla de símbolos asociada con el nodo raíz que representa al programa principal.
 >3. Las declaraciones de constantes y variables no crean nodo, sino que se incorporan como información a la tabla de símbolos del procedimiento actual.
 >4. Para una entrada de la tabla de símbolos `sym["a"]` se guarda que clase de objeto es: constante, variable, procedimiento, etc.
@@ -17,8 +17,8 @@
 >9. Si se trata de una llamada a procedimiento (se ha usado `CALL` y el identificador corresponde a un `PROCEDURE`) se comprobará que el número de argumentos coincide con el número de parámetros declarados en su definición.
 >10. Si es un identificador de una constante, es un error que sea usado en la parte izquierda de una asignación (que no sea la de su declaración).
 >11. Base de Datos:
->>1. Guarde en una tabla el nombre de usuario que guardó un programa. Provea una ruta para ver los programas de un usuario.
->>2. Un programa `belongs_to` un usuario. Un usuario has n programas. Vea la sección [DataMapper Associations](http://datamapper.org/docs/associations.html).
+>>* Guarde en una tabla el nombre de usuario que guardó un programa. Provea una ruta para ver los programas de un usuario.
+>>* Un programa `belongs_to` un usuario. Un usuario has n programas. Vea la sección [DataMapper Associations](http://datamapper.org/docs/associations.html).
 >12. Use la sección `issues` del repositorio en GitHub para coordinarse así como para llevar un histórico de las incidencias y la forma en la que se resolvieron. Repase el tutorial [Mastering Issues](https://guides.github.com/overviews/issues/).
 
 >>![alt text](http://pl-lab06.herokuapp.com/images/PL0.png "PL/0")
@@ -51,6 +51,7 @@
 * [Jison](http://zaach.github.io/jison/)
 * [Omniauth](http://intridea.github.io/omniauth/)
 * [Sinatra-Flash](https://github.com/SFEley/sinatra-flash)
+* [bootstrap](http://getbootstrap.com/)
 
 ## Tests
 
