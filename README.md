@@ -16,10 +16,12 @@
 >8. Si un identificador es usado y no fué declarado es un error.
 >9. Si se trata de una llamada a procedimiento (se ha usado `CALL` y el identificador corresponde a un `PROCEDURE`) se comprobará que el número de argumentos coincide con el número de parámetros declarados en su definición.
 >10. Si es un identificador de una constante, es un error que sea usado en la parte izquierda de una asignación (que no sea la de su declaración).
->11. Base de Datos:
+>11. Base de Datos: 
+
 >>* Guarde en una tabla el nombre de usuario que guardó un programa. Provea una ruta para ver los programas de un usuario.
 >>* Un programa `belongs_to` un usuario. Un usuario has n programas. Vea la sección [DataMapper Associations](http://datamapper.org/docs/associations.html).
->12. Use la sección `issues` del repositorio en GitHub para coordinarse así como para llevar un histórico de las incidencias y la forma en la que se resolvieron. Repase el tutorial [Mastering Issues](https://guides.github.com/overviews/issues/).
+
+>Nota: Use la sección `issues` del repositorio en GitHub para coordinarse así como para llevar un histórico de las incidencias y la forma en la que se resolvieron. Repase el tutorial [Mastering Issues](https://guides.github.com/overviews/issues/).
 
 >>![alt text](http://pl-lab06.herokuapp.com/images/PL0.png "PL/0")
 
