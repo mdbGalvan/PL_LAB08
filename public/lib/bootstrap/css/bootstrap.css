@@ -24,13 +24,51 @@ table.loadfile {
   background-color: #7f674c;
   width: 1110px;
   border-radius: 7px;
-  color: #e5b98a; }
-  table.loadfile td.file {
-    border-radius: 7px;
-    background-color: #e5b98a;
-    width: 200px; }
+  color: #e5b98a;
+  table-layout: fixed; }
   table.loadfile td.save {
     width: 200px; }
+/* ESTILO DE LA SALIDA DE LOS DATOS */
+.hidden {
+  display: none; }
+
+.unhidden {
+  display: block; }
+
+div.unhidden {
+  overflow: auto; }
+
+table {
+  border-collapse: separate;
+  margin: 0 auto 0 auto; }
+  table.ini {
+    width: 750px; }
+    table.ini th {
+      font-family: pakenham;
+      font-size: 20px;
+      text-align: center;
+      color: white;
+      border: 0px;
+      border-radius: 7px 7px 7px 7px;
+      background-color: #403326;
+      padding: 2px 0px 6px 15px;
+      margin-top: 40px;
+      margin-bottom: 23px; }
+    table.ini td {
+      font-family: Arial;
+      color: #444444;
+      vertical-align: top;
+      text-align: left;
+      font-family: arial;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 10px;
+      line-height: 20px;
+      background-color: #ffffff;
+      -moz-border-radius: 7px;
+      -webkit-border-radius: 7px;
+      border-radius: 7px;
+      border: 2px solid #333029; }
 /* CENTRAR - USADO PARA LA IMAGEN DEL ENCABEZADO */
 .center-block {
     display: block;
@@ -57,12 +95,6 @@ table.loadfile {
     cursor: inherit;
     display: block;
 }
-/* ESTILO DE LA SALIDA DE LOS DATOS */
-.hidden {
-  display: none; }
-
-.unhidden {
-  display: block; }
 
 /*!
  * Bootstrap v2.3.2
@@ -301,7 +333,7 @@ body {
 }
 
 a {
-  color: #0088cc;
+  color: #000000; /*Antes: 0088cc*/
   text-decoration: none;
 }
 
@@ -2020,7 +2052,7 @@ legend + .control-group {
 
 .form-horizontal .control-group:before,
 .form-horizontal .control-group:after {
-  display: table;
+  /*display: table; MDBG*/
   line-height: 0;
   content: "";
 }
@@ -4441,8 +4473,8 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-inner {
   min-height: 40px;
-  padding-right: 20px;
-  padding-left: 20px;
+  /*padding-right: 20px;
+  padding-left: 20px; MDBG */
   background-color: #fafafa;
   background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
@@ -4463,7 +4495,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-inner:before,
 .navbar-inner:after {
-  display: table;
+  /*display: table; MBDG */
   line-height: 0;
   content: "";
 }

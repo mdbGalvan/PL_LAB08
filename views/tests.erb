@@ -11,14 +11,14 @@
       <li> <a href="https://github.com/SFEley/sinatra-flash" target="_blank" title="sinatra-flash">Flash</a> </li>
     </ul>
 
-	<link rel="stylesheet" href="../css/mocha.css" />
+	<link rel="stylesheet" href="tests/css/mocha.css" />
 	<div id="mocha"></div>
 
-	<script src="tests/chai.js"></script>
-	<script src="tests/mocha.js"></script>
+	<script src="tests/js/chai.js"></script>
+	<script src="tests/js/mocha.js"></script>
 		
 	<script>mocha.setup('tdd')</script>
-	<script src="tests/tests.js"></script>
+	<script src="tests/js/tests.js"></script>
 		
 	<script>
 		mocha.run();
@@ -31,39 +31,54 @@
       </tr>
       <tr>
         <td>
-          <nav>
-            <ul>
+          <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+              <ul class="nav">
 
-            </ul>
-          </nav>  
+              </ul>
+            </div>
+          </div>   
           <p>
             Or load an existing file:
           </p>
-          <input type="file" id="examples" />
+          <span class="btn btn-file">
+            File <input type="file" id="examples">
+          </span>
         </td>
         <td>
-          <form action="/save" method="post">
+          <form class="form-horizontal" action="/save" method="post">
             <textarea id="input" name="input" autofocus rows = "7">
 
             </textarea>
-            <br/>
-            <label for="saveas">Save the code as:</label>
-            <input id="saveas" type="text" name="fname" 
-                   title="Un identificador (que no sea la palabra 'test')"
-                   pattern="^(?!test$)\w+$"/>
+            <br>
+            <div class="control-group">
+              <label for="saveas">Save the code as:</label>
+              <input id="saveas" type="text" name="fname" class="input-large"
+                title="Un identificador (que no sea la palabra 'test')"
+                pattern="^(?!test$)\w+$"/>
+              <input class="btn" type="submit" value="Save">
+            </div>
           </form>
         </td>
       </tr>
       <tr>
-        <td><button class="mylink" id="parse" type="button">parse</button></td>
-        <td></td>
+        <td><button class="btn" id="parse" type="button">parse</button></td>
+        <td>
+          <form class="form-horizontal" action="/delete" method="post">
+            <div class="control-group">
+              <label for="deleteas">Delete the code:</label>
+              <input id="deleteas" type="text" name="fname" class="input-large"
+                title="Un identificador (que no sea la palabra 'test')"
+                           pattern="^(?!test$)\w+$"/>
+              <input class="btn" type="submit" value="Delete">
+            </div>
+          </form>
+        </td>
       </tr>
     </table>
-  </p>
-
 
   <p>
-
+    <div id="flash"></div>
   </p>
 
   <div class="hidden" id="out">

@@ -31,11 +31,6 @@ file "public/js/calculator.js" => %w{public/lib/calculator.jison} do
   sh "jison public/lib/calculator.jison public/lib/calculator.l -o public/js/calculator.js"
 end
 
-desc "Compile the grammar public/calculator2.jison"
-file "public/js/calculator2.js" => %w{public/lib/calculator2.jison} do
-  sh "jison public/lib/calculator2.jison public/lib/calculator2.l -o public/js/calculator2.js"
-end
-
 desc "Compile the sass public/css/styles.scss"
 task :css do
   sh "sass public/css/styles.scss public/css/styles.css"

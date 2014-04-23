@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Parser using Jison</title>
+    <title>Análisis de Ámbito en PL0</title>
     <link rel="icon" type="image/jpg" href="images/favicon.jpg" />
     <!-- <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" charset="utf-8" /> -->
     <!-- JQuery -->
@@ -20,14 +20,15 @@
   </head>
   <body>
     <header>
+      <br>
       <img class="center-block" src="img/logo.png" width=10%>
-      <h1 class="text-center almendra">Analizador Sintáctico del Lenguaje PL0 usando Jison</h1>
+      <h1 class="text-center almendra">Análisis de Ámbito en PLO</h1>
     </header>
 
     <section>
       <%= yield %>
     </section>
-    <script src="js/jquery.stickytableheaders.js"></script>
+    <script src="lib/stickytableheaders/jquery.stickytableheaders.js"></script>
     <script type="text/javascript">$("table.ini").stickyTableHeaders();</script>
     <footer>
       <script>
@@ -37,7 +38,6 @@
         });
       </script>
       <script type="text/javascript" src="js/calculator.js"></script>
-      <script type="text/javascript" src="js/calculator2.js"></script>
       <script type="text/javascript" src="js/main.js"></script>
     </footer>
   </body>

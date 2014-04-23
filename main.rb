@@ -13,7 +13,7 @@ end
 enable :sessions
 set :session_secret, '*&(^#234)'
 set :reserved_words, %w{grammar test login auth}
-set :max_files, 5        # no more than max_files+1 will be saved
+set :max_files, 3        # no more than max_files+1 will be saved
 
 helpers do
   def current?(path='/')
@@ -27,9 +27,9 @@ end
 
 get '/logout' do
   old_user = session[:name]
-  session[:name] = nil
+  session[:name] = "Login"
   session[:auth] = nil
-  session[:image] = nil
+  session[:image] = "img/user.jpg"
   session[:url] = nil
   flash[:notice] = %Q{<div class="success">Bye, #{old_user}</div>}
   redirect back
