@@ -36,11 +36,14 @@ get '/logout' do
 end
 
 get '/:selected?' do |selected|
-  puts "*************@auth*****************"
-  puts session[:name]
+  puts "\n*****************************@auth*****************************"
+  puts "\nName: " + session[:name]
+  puts "\n***** Auth Hash " 
   pp session[:auth]
-  programs = PL0Program.all
+  programs = PL0Program.all(:user => session[:name])
+  puts "\n***** Programs Stored  "
   pp programs
+  puts "\n***** Selected "
   puts "selected = #{selected}"
   c  = PL0Program.first(:name => selected)
   user = session[:name] 
