@@ -93,6 +93,7 @@ post '/save' do
 end
 
 post '/delete' do
+    puts "\n*****************************delete*****************************"
   pp params
   name = params[:fname]
   if session[:auth] # authenticated
@@ -101,7 +102,7 @@ post '/delete' do
         %Q{<div class="error">Can't save file with name '#{name}'.</div>}
       redirect back
     else 
-      c  = PL0Program.first(:name => name)
+      c  = PL0Program.first(:name => name, :user => session[:name])
       if c
         c.source = params["input"]
         c.destroy
