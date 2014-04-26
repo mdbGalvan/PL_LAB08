@@ -54,6 +54,7 @@ get '/:selected?' do |selected|
 end
 
 post '/save' do
+  puts "\n*****************************save*****************************"
   pp params
   name = params[:fname]
   if session[:auth] # authenticated
@@ -62,7 +63,7 @@ post '/save' do
         %Q{<div class="error">Can't save file with name '#{name}'.</div>}
       redirect back
     else 
-      c  = PL0Program.first(:name => name)
+      c  = PL0Program.first(:name => name, :user => session[:name])
       if c
         c.source = params["input"]
         c.save
@@ -73,7 +74,9 @@ post '/save' do
         end
         c = PL0Program.create(
           :name => params["fname"], 
-          :source => params["input"])
+          :user => session[:name],
+          :source => params["input"],
+          :login_user => session[:name])
       end
       flash[:notice] = 
         %Q{<div class="success">File saved as #{c.name} by #{session[:name]}.</div>}
