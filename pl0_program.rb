@@ -9,7 +9,7 @@ class Login
   
   property :user, String, :key => true
 
-  has n, :pL0Programs, "PL0Program"
+  has n, :pL0Programs
 end
 
 # Models PL0Program
@@ -20,7 +20,7 @@ class PL0Program
   property :user, String, :key => true
   property :source, String, :length => 1..1024
   
-  belongs_to :login, "Login"  # defaults to :required => true # Cannot be nil
+  belongs_to :login  # defaults to :required => true # Cannot be nil
 end
 
 DataMapper.finalize			# This checks the models for validity and initializes all properties associated with relationships
