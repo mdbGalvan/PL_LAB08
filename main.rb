@@ -45,7 +45,7 @@ get '/:selected?' do |selected|
   pp programs
   puts "\n***** Selected "
   puts "selected = #{selected}"
-  c  = PL0Program.first(:name => selected, :user => session[:name])
+  c  = PL0Program.first(:name => selected)
   user = session[:name] 
   img = session[:image]
   url = session[:url]

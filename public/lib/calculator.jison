@@ -22,6 +22,16 @@ function makeNewScope(id) {
    return symbolTable;
 }
 
+function unary(x, cl) {
+  var pr = ''; 
+  var po = '';
+  x = x.replace(/\n+$/,'');
+  if (cl) {
+    pr = "<span class='"+cl+"'>";
+    po = "</span>";
+  }
+  return "\t"+pr+x+po+"\n";
+}
 
 %}
 
@@ -55,6 +65,9 @@ block
       $2 ? v = $2 : v = 'NULL'
       $3 ? p = $3 : p = 'NULL'
 
+      var locals = ($1.length != 0)? unary('# global: '+$1.join('')) : 
+                                            '';
+                                            
       $$ = {
         typ: 'BLOCK',
         cte: c,
@@ -110,6 +123,7 @@ proc_block
 assignment
   : id ASSIGN number
     {
+      symbolTable.vars[$id] = { type:  "CONST", initial_value: $3 }; // NUEVO
       $$ = {
         typ: 'CONST',
         lft: $1.val,
@@ -132,6 +146,7 @@ assigment_star
 // ***** ID
 id: ID
   {
+    //symbolTable.vars[$id] = { type:  "VAR", initial_value: null }; // NUEVO
     $$ = {
       typ: 'ID',
       val: yytext
