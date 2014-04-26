@@ -36,14 +36,16 @@ get '/logout' do
 end
 
 get '/:selected?' do |selected|
-  puts "*************@auth*****************"
-  puts session[:name]
+  puts "\n*****************************@auth*****************************"
+  puts "\nName: " + session[:name]
+  puts "\n***** Auth Hash " 
   pp session[:auth]
-  programs = PL0Program.all
+  programs = PL0Program.all(:user => session[:name])
+  puts "\n***** Programs Stored  "
   pp programs
+  puts "\n***** Selected "
   puts "selected = #{selected}"
-  c  = PL0Program.first(:name => selected)
-  if session[:name] == nil then nobody = "hidden" else nobody = "unhidden" end
+  c  = PL0Program.first(:name => selected, :user => session[:name])
   user = session[:name] 
   img = session[:image]
   url = session[:url]
@@ -55,6 +57,7 @@ get '/:selected?' do |selected|
 end
 
 post '/save' do
+  puts "\n*****************************save*****************************"
   pp params
   name = params[:fname]
   if session[:auth] # authenticated
@@ -63,7 +66,7 @@ post '/save' do
         %Q{<div class="error">Can't save file with name '#{name}'.</div>}
       redirect back
     else 
-      c  = PL0Program.first(:name => name)
+      c  = PL0Program.first(:name => name, :user => session[:name])
       if c
         c.source = params["input"]
         c.save
@@ -74,7 +77,9 @@ post '/save' do
         end
         c = PL0Program.create(
           :name => params["fname"], 
-          :source => params["input"])
+          :user => session[:name],
+          :source => params["input"],
+          :login_user => session[:name])
       end
       flash[:notice] = 
         %Q{<div class="success">File saved as #{c.name} by #{session[:name]}.</div>}
@@ -91,6 +96,7 @@ post '/save' do
 end
 
 post '/delete' do
+    puts "\n*****************************delete*****************************"
   pp params
   name = params[:fname]
   if session[:auth] # authenticated
@@ -99,7 +105,7 @@ post '/delete' do
         %Q{<div class="error">Can't save file with name '#{name}'.</div>}
       redirect back
     else 
-      c  = PL0Program.first(:name => name)
+      c  = PL0Program.first(:name => name, :user => session[:name])
       if c
         c.source = params["input"]
         c.destroy
