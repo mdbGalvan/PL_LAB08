@@ -10,6 +10,10 @@ get '/tests' do
   erb :tests
 end
 
+get '/video' do
+  erb :video
+end
+
 enable :sessions
 set :session_secret, '*&(^#234)'
 set :reserved_words, %w{grammar test login auth}
