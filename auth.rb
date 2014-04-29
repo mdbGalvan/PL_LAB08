@@ -22,6 +22,7 @@ get '/auth/:name/callback' do
   session[:image] = @auth['info']['image']
   session[:email] = @auth['info']['email']
   session[:url] = @auth['extra']['raw_info']['link']
+  c = Login.first_or_create(:user => session[:name])
   puts "params = #{params}"
   puts "@auth.class = #{@auth.class}"
   puts "@auth info = #{@auth['info']}"

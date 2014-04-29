@@ -17,7 +17,7 @@ end
 enable :sessions
 set :session_secret, '*&(^#234)'
 set :reserved_words, %w{grammar test login auth}
-set :max_files, 5        # no more than max_files+1 will be saved
+set :max_files, 3        # no more than max_files+1 will be saved
 
 helpers do
   def current?(path='/')
@@ -45,6 +45,7 @@ get '/:selected?' do |selected|
   puts "\n***** Auth Hash " 
   pp session[:auth]
   programs = PL0Program.all(:user => session[:name])
+  users = Login.all
   puts "\n***** Programs Stored  "
   pp programs
   puts "\n***** Selected "
@@ -56,8 +57,12 @@ get '/:selected?' do |selected|
   email = session[:email]
   source = if c then c.source else "begin \n\ta = 3-2-1 \nend." end
   erb :index, 
-      :locals => {  :programs => programs, :source => source, 
+      :locals => {  :programs => programs, :users => users, :source => source, 
                     :user => user, :img => img, :url => url, :email => email }
+end
+
+get '/:user/:selected?' do |user, selected|
+  erb :grammar
 end
 
 post '/save' do

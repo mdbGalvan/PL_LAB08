@@ -31,30 +31,44 @@
 
   <br><br>
 
+
+
+
     <table class="loadfile">
       <tr>
-        <td class="save">Select a file already stored:</td>
-        <td>Or write your own code:</td>
-      </tr>
-      <tr>
-        <td>
+        <td class="save">
+
+          <p>Select a file already stored:</p>
+          
           <div class="navbar navbar-inverse">
             <div class="navbar-inner">
               <ul class="nav">
-            <% programs.sort.each do |p| %>
-              <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
-            <% end %>
+                <% programs.sort.each do |p| %>
+                  <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
+                  <!--<li><a href="<%= '/'+p.user+'/'+ p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>-->
+                <% end %>
               </ul>
             </div>
           </div>   
-          <p>
-            Or load an existing file:
-          </p>
+            
+          <p>Or load an existing file:</p>
           <span class="btn btn-file">
             File <input type="file" id="examples">
           </span>
+
+          <p></p>
+
+          <p>You can see the files stored by:</p>
+          <ul class="nav">
+            <% users.sort.each do |p| %>
+              <li><%= p.user %></a></li>
+            <% end %>
+          </ul>
+
         </td>
         <td>
+          <p>Or write your own code:</p>
+
           <form class="form-horizontal" action="/save" method="post">
             <textarea id="input" name="input" autofocus rows = "7">
 <%= source %>
@@ -68,14 +82,7 @@
               <input class="btn" type="submit" value="Save">
             </div>
           </form>
-        </td>
-      </tr>
-      <tr>
-        <td>
-            <label>Click on the following button for parser:</label>
-            <button class="btn" id="parse" type="button">parse</button>
-        </td>
-        <td>
+
           <form class="form-horizontal" action="/delete" method="post">
             <div class="control-group">
               <label for="deleteas">Delete the code:</label>
@@ -85,8 +92,10 @@
               <input class="btn" type="submit" value="Delete">
             </div>
           </form>
+
+          <label>Click on the following button for parser:</label>
+          <button class="btn" id="parse" type="button">parse</button>
         </td>
-      </tr>
     </table>
 
   <p>
@@ -115,4 +124,6 @@
   </div>
 
 </div> <!-- content -->
+
+<br><br><br>
 

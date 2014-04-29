@@ -28,6 +28,9 @@ table.loadfile {
   table-layout: fixed; }
   table.loadfile td.save {
     width: 200px; }
+  table.loadfile td {
+    vertical-align: top;
+  }
 /* ESTILO DE LA SALIDA DE LOS DATOS */
 .hidden {
   display: none; }
