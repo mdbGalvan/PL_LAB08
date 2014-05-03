@@ -2,7 +2,7 @@
     y descomentar lo que está comentado. Tb hay que hacerlo en calculator.l */
 
 %{
-var symbolTables = [{ name: '', father: null, vars: {} }];
+var symbolTables = [{ name: 'GLOBAL', father: null, vars: {} }];
 var scope = 0; 
 var symbolTable = symbolTables[scope];
 
@@ -22,15 +22,15 @@ function makeNewScope(id) {
    return symbolTable;
 }
 
-function unary(x, cl) {
-  var pr = ''; 
-  var po = '';
-  x = x.replace(/\n+$/,'');
-  if (cl) {
-    pr = "<span class='"+cl+"'>";
-    po = "</span>";
-  }
-  return "\t"+pr+x+po+"\n";
+function findSymbol(x) {
+  var f;
+  var s = scope;
+  do {
+    f = symbolTables[s].vars[x];
+    s--;
+  } while (s >= 0 && !f);
+  s++;
+  return [f, s];
 }
 
 %}
@@ -64,9 +64,6 @@ block
       $1 ? c = $1 : c = 'NULL'
       $2 ? v = $2 : v = 'NULL'
       $3 ? p = $3 : p = 'NULL'
-
-      var locals = ($1.length != 0)? unary('# global: '+$1.join('')) : 
-                                            '';
                                             
       $$ = {
         typ: 'BLOCK',
