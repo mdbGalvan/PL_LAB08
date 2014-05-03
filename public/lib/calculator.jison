@@ -85,11 +85,11 @@ const_block
 
 // ***** VAR_BLOCK => (var_block)?
 var_block
-  : VAR id id_star SEMICOLON
+  : VAR ID id_star SEMICOLON
     {
-      if (symbolTable.vars[$id]) 
-        throw new Error("Function "+$id.val+" defined twice");
-      symbolTable.vars[$id.val] = { type:  "VAR", initial_value: '' };
+      //if (symbolTable.vars[$ID]) 
+      //  throw new Error("Function "+$ID+" defined twice");
+      symbolTable.vars[$ID] = { type:  "VAR", initial_value: '' };
       $$ = [{
         typ: 'VAR',
         val: $2.val
@@ -103,8 +103,14 @@ var_block
 
 // ***** PROC_BLOCK => (proc_block)*
 proc_block
-  : PROCEDURE id argument SEMICOLON block SEMICOLON proc_block
+  : PROCEDURE ID argument SEMICOLON block SEMICOLON proc_block
     {
+      //if (symbolTable.vars[$ID]) 
+      //  throw new Error("Function "+$ID+" defined twice");
+      //symbolTable.vars[$ID] = { type:  "PROCEDURE", initial_value: '' };
+
+      //makeNewScope($ID);
+
       $3 ? a = $3 : a = 'NULL'
       $$ = {
         typ: 'PROCEDURE',
@@ -119,11 +125,11 @@ proc_block
 
 // ***** ASSIGNMENT => ID = NUMBER
 assignment
-  : id ASSIGN number
+  : ID ASSIGN number
     {
-      if (symbolTable.vars[$id]) 
-        throw new Error("Function "+$id.val+" defined twice");
-      symbolTable.vars[$id.val] = { type:  "CONST", initial_value: $number.val };
+      //if (symbolTable.vars[$ID]) 
+      //  throw new Error("Function "+$ID+" defined twice");
+      symbolTable.vars[$ID] = { type:  "CONST", initial_value: $number };
 
       $$ = {
         typ: 'CONST',
@@ -145,7 +151,7 @@ assigment_star
   ;
 
 // ***** ID
-id: ID
+/*id: ID
   {
     // what if it is a FUNC or a LOCAL or a GLOBAL? or not defined?
     var info = findSymbol($ID);
@@ -154,24 +160,26 @@ id: ID
 
     if (info && info.type === 'PROCEDURE') {
       throw new Error("Symbol "+$ID+" refers to a function");
-//    } else if (info) {
-    } else {
+    } else if (info) {
       $$ = {
-        typ: 'ID',
+        //typ: 'ID',
         val: yytext,
         declared_in: symbolTables[s].name
       };
-    //}
-    //else {
-    //  throw new Error("Symbol "+$ID+" not declared");
+    }
+    else {
+      throw new Error("Symbol "+$ID+" not declared");
     }
   }
-  ;
+  ;*/
 
 // ***** ID_STAR => (, ID)*
 id_star
-  : COMMA id id_star
+  : COMMA ID id_star
     {
+      //if (symbolTable.vars[$ID]) 
+      //  throw new Error("Function "+$ID+" defined twice");
+      symbolTable.vars[$ID] = { type:  "VAR", initial_value: '' };
       $$ = [{
         typ: 'VAR',
         val: $2.val
@@ -185,7 +193,7 @@ id_star
 
 // ***** ARGUMENT => (ID argument_star)?
 argument 
-  : LPAREN id argument_star RPAREN
+  : LPAREN ID argument_star RPAREN
     {
       $$ = [{
         typ: 'ARG',
@@ -200,7 +208,7 @@ argument
 
 // ***** ARGUMENT_STAR => (, ID)*
 argument_star
-  : COMMA id argument_star
+  : COMMA ID argument_star
     {
       $$ = [{
         typ: 'ARG',
@@ -216,16 +224,17 @@ argument_star
 // ***** NUMBER
 number: NUMBER
   {
-    $$ = {
-      typ: 'NUMBER',
-      val: yytext
-    };
+    //$$ = {
+    //  typ: 'NUMBER',
+    //  val: yytext
+    //};
+    $$ = $1
   }
   ;
 
 // ***** STATEMENT => ID = expression | CALL ID argument? | BEGIN statement * END | IFELSE | IF | WHILE
 statement
-  : id ASSIGN expression
+  : ID ASSIGN expression
     {
       $$ = {
         typ: '=',
@@ -233,7 +242,7 @@ statement
         val: $3
       };
     }
-  | CALL id argument
+  | CALL ID argument
     {
       $3 ? a = $3 : a = 'NULL'
       $$ = {
@@ -346,7 +355,26 @@ term
 // ***** FACTOR => NUMBER|ID|(expresioo)
 factor
   : number
-  | id 
+  | ID 
+    {
+      // what if it is a FUNC or a LOCAL or a GLOBAL? or not defined?
+      var info = findSymbol($ID);
+      var s = info[1];
+      info = info[0];
+
+      if (info && info.type === 'PROCEDURE') {
+        throw new Error("Symbol "+$ID+" refers to a function");
+      } else if (info) {
+        $$ = {
+          //typ: 'ID',
+          val: yytext,
+          declared_in: symbolTables[s].name
+        };
+      }
+      else {
+        throw new Error("Symbol "+$ID+" not declared");
+      }
+    }
   | LPAREN expression RPAREN
     {
       $$ = $2;
