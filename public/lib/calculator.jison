@@ -88,8 +88,8 @@ var_block
   : VAR id id_star SEMICOLON
     {
       if (symbolTable.vars[$id]) 
-        throw new Error("Function "+$id+" defined twice");
-      symbolTable.vars[$id] = { type:  "VAR", initial_value: '' };
+        throw new Error("Function "+$id.val+" defined twice");
+      symbolTable.vars[$id.val] = { type:  "VAR", initial_value: '' };
       $$ = [{
         typ: 'VAR',
         val: $2.val
@@ -121,8 +121,8 @@ assignment
   : id ASSIGN number
     {
       if (symbolTable.vars[$id]) 
-        throw new Error("Function "+$id+" defined twice");
-      symbolTable.vars[$id] = { type:  "CONST", initial_value: $3 };
+        throw new Error("Function "+$id.val+" defined twice");
+      symbolTable.vars[$id.val] = { type:  "CONST", initial_value: $number.val };
 
       $$ = {
         typ: 'CONST',
