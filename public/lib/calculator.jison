@@ -119,7 +119,10 @@ proc_block
 assignment
   : id ASSIGN number
     {
-      symbolTable.vars[$id] = { type:  "CONST", initial_value: $3 }; // NUEVO
+      if (symbolTable.vars[$id]) 
+        throw new Error("Function "+$id+" defined twice");
+      symbolTable.vars[$id] = { type:  "CONST", initial_value: $3 };
+
       $$ = {
         typ: 'CONST',
         lft: $1.val,
@@ -142,11 +145,23 @@ assigment_star
 // ***** ID
 id: ID
   {
-    //symbolTable.vars[$id] = { type:  "VAR", initial_value: null }; // NUEVO
-    $$ = {
-      typ: 'ID',
-      val: yytext
-    };
+    // what if it is a FUNC or a LOCAL or a GLOBAL? or not defined?
+    var info = findSymbol($ID);
+    var s = info[1];
+    info = info[0];
+
+    if (info && info.type === 'PROCEDURE') {
+      throw new Error("Symbol "+$ID+" refers to a function");
+    } else if (info) {
+      $$ = {
+        typ: 'ID',
+        val: yytext,
+        declared_in: symbolTables[s].name
+      };
+    }
+    else {
+      throw new Error("Symbol "+$ID+" not declared");
+    }
   }
   ;
 
