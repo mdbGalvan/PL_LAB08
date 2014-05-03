@@ -110,7 +110,8 @@ proc_block
         typ: 'PROCEDURE',
         nam: $2.val,
         arg: a,
-        blc: $5
+        blc: $5,
+        syt: symbolTables
       }; 
     }
   | /* empty */
