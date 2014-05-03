@@ -68,8 +68,6 @@ block
                                             
       $$ = {
         typ: 'BLOCK',
-        cte: c,
-        var: v,
         prc: p,
         sta: $4
       }; 
