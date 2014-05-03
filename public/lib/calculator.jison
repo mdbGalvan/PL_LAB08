@@ -53,7 +53,8 @@ function findSymbol(x) {
 program
   : block DOT EOF
     { 
-      return $1;
+      $$ = $1;
+      return [symbolTables, $$]
     }
   ;
 
