@@ -62,8 +62,6 @@ program
 block
   : const_block var_block proc_block statement
     { 
-      $1 ? c = $1 : c = 'NULL'
-      $2 ? v = $2 : v = 'NULL'
       $3 ? p = $3 : p = 'NULL'
                                             
       $$ = {
@@ -89,6 +87,9 @@ const_block
 var_block
   : VAR id id_star SEMICOLON
     {
+      if (symbolTable.vars[$id]) 
+        throw new Error("Function "+$id+" defined twice");
+      symbolTable.vars[$id] = { type:  "VAR", initial_value: '' };
       $$ = [{
         typ: 'VAR',
         val: $2.val
@@ -152,15 +153,16 @@ id: ID
 
     if (info && info.type === 'PROCEDURE') {
       throw new Error("Symbol "+$ID+" refers to a function");
-    } else if (info) {
+//    } else if (info) {
+    } else {
       $$ = {
         typ: 'ID',
         val: yytext,
         declared_in: symbolTables[s].name
       };
-    }
-    else {
-      throw new Error("Symbol "+$ID+" not declared");
+    //}
+    //else {
+    //  throw new Error("Symbol "+$ID+" not declared");
     }
   }
   ;
